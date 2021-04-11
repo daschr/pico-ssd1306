@@ -1,3 +1,5 @@
+[![example vid](ssd1306-example.gif)]()
+
 # pico-ssd1306
 simple library for using ssd1306 displays with the pico-sdk
 
