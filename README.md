@@ -9,3 +9,9 @@ Simple library for using ssd1306 displays with the Raspberry Pi Pico and the pic
 
 ## Documentation
 * see `ssd1306.h` and example
+
+## Example
+* set `PICO_SDK_PATH`
+* goto `example`
+* `mkdir build && cd build && cmake .. && make`
+* copy the `ssd1306-example.uf2` to your Pico
