@@ -25,7 +25,7 @@ int main() {
 
 
 void setup_gpios(void) {
-    i2c_init(i2c1, 400000); 
+    i2c_init(i2c1, 400000);
     gpio_set_function(2, GPIO_FUNC_I2C);
     gpio_set_function(3, GPIO_FUNC_I2C);
     gpio_pull_up(2);
@@ -34,7 +34,7 @@ void setup_gpios(void) {
 
 
 void animation(void) {
-	char *words[]={"SSD1306", "DISPLAY", "DRIVER"};	
+    char *words[]= {"SSD1306", "DISPLAY", "DRIVER"};
 
     ssd1306_t disp;
     disp.external_vcc=false;
@@ -45,34 +45,34 @@ void animation(void) {
 
 
     for(;;) {
-		for(int y=0;y<31;++y){
-			ssd1306_draw_line(&disp, 0, y, 127, y);
-    		ssd1306_show(&disp);
-			sleep_ms(SLEEPTIME);
-			ssd1306_clear(&disp);
-		}
-		
-		for(int y=0, i=1;y>=0;y+=i){
-			ssd1306_draw_line(&disp, 0, 31-y, 127, 31+y);
-			ssd1306_draw_line(&disp, 0, 31+y, 127, 31-y);
-    		ssd1306_show(&disp);
-			sleep_ms(SLEEPTIME);
-			ssd1306_clear(&disp);
-			if(y==32) i=-1;
-		}
-		
-		for(int i=0;i<sizeof(words)/sizeof(char *);++i){	
-			ssd1306_draw_string(&disp, 8, 24, 2, words[i]);
-    		ssd1306_show(&disp);
-			sleep_ms(800);
-			ssd1306_clear(&disp);
-		}
-   		
-		for(int y=31;y<63;++y){
-			ssd1306_draw_line(&disp, 0, y, 127, y);
-    		ssd1306_show(&disp);
-			sleep_ms(SLEEPTIME);
-			ssd1306_clear(&disp);
-		}
-	}
+        for(int y=0; y<31; ++y) {
+            ssd1306_draw_line(&disp, 0, y, 127, y);
+            ssd1306_show(&disp);
+            sleep_ms(SLEEPTIME);
+            ssd1306_clear(&disp);
+        }
+
+        for(int y=0, i=1; y>=0; y+=i) {
+            ssd1306_draw_line(&disp, 0, 31-y, 127, 31+y);
+            ssd1306_draw_line(&disp, 0, 31+y, 127, 31-y);
+            ssd1306_show(&disp);
+            sleep_ms(SLEEPTIME);
+            ssd1306_clear(&disp);
+            if(y==32) i=-1;
+        }
+
+        for(int i=0; i<sizeof(words)/sizeof(char *); ++i) {
+            ssd1306_draw_string(&disp, 8, 24, 2, words[i]);
+            ssd1306_show(&disp);
+            sleep_ms(800);
+            ssd1306_clear(&disp);
+        }
+
+        for(int y=31; y<63; ++y) {
+            ssd1306_draw_line(&disp, 0, y, 127, y);
+            ssd1306_show(&disp);
+            sleep_ms(SLEEPTIME);
+            ssd1306_clear(&disp);
+        }
+    }
 }
