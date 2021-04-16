@@ -25,12 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - uses: mattnotmitt/doxygen-action@v1
       
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
         
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v3.7.3
