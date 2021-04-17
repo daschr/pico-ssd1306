@@ -8,6 +8,7 @@ Simple library for using ssd1306 displays with the Raspberry Pi Pico and the pic
 * see example
 
 ## Documentation
+* online [documentation](https://daschr.github.io/pico-ssd1306/)
 * see `ssd1306.h` and example
 
 ## Example
