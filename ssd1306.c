@@ -69,7 +69,7 @@ bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address
 
     ++(p->buffer);
 
-	// from https://github.com/makerportal/rpi-pico-ssd1306
+    // from https://github.com/makerportal/rpi-pico-ssd1306
     int8_t cmds[]= {
         SET_DISP | 0x00,  // off
         // address setting
@@ -135,7 +135,7 @@ inline void ssd1306_clear(ssd1306_t *p) {
 }
 
 void ssd1306_draw_pixel(ssd1306_t *p, uint32_t x, uint32_t y) {
-	if(x>=p->width || y>=p->height) return;
+    if(x>=p->width || y>=p->height) return;
 
     p->buffer[x+p->width*(y>>3)]|=0x1<<(y&0x07); // y>>3==y/8 && y&0x7==y%8
 }
@@ -150,26 +150,32 @@ void ssd1306_draw_line(ssd1306_t *p, int32_t x1, int32_t y1, int32_t x2, int32_t
         y2=t;
     }
 
+    if(x1==x2) {
+        for(int32_t i=y1; i<=y2; ++i)
+            ssd1306_draw_pixel(p, x1, i);
+        return;
+    }
+
     float m=(float) (y2-y1) / (float) (x2-x1);
 
     for(int32_t i=x1; i<=x2; ++i) {
         float y=m*(float) (i-x1)+(float) y1;
-        ssd1306_draw_pixel(p, (uint32_t) i, (uint32_t) y);
+        ssd1306_draw_pixel(p, i, (uint32_t) y);
     }
 }
 
-void ssd1306_draw_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height){
-	for(uint32_t i=0;i<width;++i)
-		for(uint32_t j=0;j<height;++j)
-			ssd1306_draw_pixel(p, x+i, y+j);
+void ssd1306_draw_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
+    for(uint32_t i=0; i<width; ++i)
+        for(uint32_t j=0; j<height; ++j)
+            ssd1306_draw_pixel(p, x+i, y+j);
 
 }
 
-void ssd13606_draw_empty_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height){
-	ssd1306_draw_line(p, x, y, x+width, y);
-	ssd1306_draw_line(p, x, y+height, x+width, y+height);
-	ssd1306_draw_line(p, x, y, x, y+height);
-	ssd1306_draw_line(p, x+width, y, x+width, y+height);
+void ssd13606_draw_empty_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
+    ssd1306_draw_line(p, x, y, x+width, y);
+    ssd1306_draw_line(p, x, y+height, x+width, y+height);
+    ssd1306_draw_line(p, x, y, x, y+height);
+    ssd1306_draw_line(p, x+width, y, x+width, y+height);
 }
 
 void ssd1306_draw_char_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char c) {
