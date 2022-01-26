@@ -33,6 +33,12 @@ SOFTWARE.
 #include "ssd1306.h"
 #include "font.h"
 
+inline static void swap(uint32_t *a, uint32_t *b) {
+    uint32_t *t=a;
+    *a=*b;
+    *b=*t;
+}
+
 inline static void fancy_write(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, char *name) {
     switch(i2c_write_blocking(i2c, addr, src, len, false)) {
     case PICO_ERROR_GENERIC:
@@ -142,15 +148,13 @@ void ssd1306_draw_pixel(ssd1306_t *p, uint32_t x, uint32_t y) {
 
 void ssd1306_draw_line(ssd1306_t *p, int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
     if(x1>x2) {
-        uint32_t t=x1;
-        x1=x2;
-        x2=t;
-        t=y1;
-        y1=y2;
-        y2=t;
+        swap(&x1, &x2);
+        swap(&y1, &y2);
     }
 
     if(x1==x2) {
+        if(y1>y2)
+            swap(&y1, &y2);
         for(int32_t i=y1; i<=y2; ++i)
             ssd1306_draw_pixel(p, x1, i);
         return;
