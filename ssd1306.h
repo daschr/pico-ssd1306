@@ -178,6 +178,26 @@ void ssd1306_draw_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, u
 void ssd13606_draw_empty_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height);
 
 /**
+	@brief draw monochrome bitmap with offset
+
+	@param[in] p : instance of display
+	@param[in] data : image data (whole file)
+	@param[in] size : size of image data in bytes
+	@param[in] x_offset : offset of horizontal coordinate
+	@param[in] y_offset : offset of vertical coordinate
+*/
+void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const long size, uint32_t x_offset, uint32_t y_offset);
+
+/**
+	@brief draw monochrome bitmap
+
+	@param[in] p : instance of display
+	@param[in] data : image data (whole file)
+	@param[in] size : size of image data in bytes
+*/
+void ssd1306_bmp_show_image(ssd1306_t *p, const uint8_t *data, const long size);
+
+/**
 	@brief draw char with given font
 
 	@param[in] p : instance of display

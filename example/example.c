@@ -5,6 +5,7 @@
 #include "hardware/i2c.h"
 
 #include "ssd1306.h"
+#include "image.h"
 
 #define SLEEPTIME 25
 
@@ -41,7 +42,7 @@ void animation(void) {
     ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
     ssd1306_clear(&disp);
 
-
+    printf("ANIMATION!\n");
 
 
     for(;;) {
@@ -74,5 +75,9 @@ void animation(void) {
             sleep_ms(SLEEPTIME);
             ssd1306_clear(&disp);
         }
+
+        ssd1306_bmp_show_image(&disp, image_data, image_size);
+        ssd1306_show(&disp);
+        sleep_ms(2000);
     }
 }

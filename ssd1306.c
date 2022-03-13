@@ -210,6 +210,68 @@ void ssd1306_draw_string(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, c
     ssd1306_draw_string_with_font(p, x, y, scale, font_8x5, s);
 }
 
+static inline uint32_t ssd1306_bmp_get_val(const uint8_t *data, const size_t offset, uint8_t size) {
+    switch(size) {
+    case 1:
+        return data[offset];
+    case 2:
+        return data[offset]|(data[offset+1]<<8);
+    case 4:
+        return data[offset]|(data[offset+1]<<8)|(data[offset+2]<<16)|(data[offset+3]<<24);
+    default:
+        __builtin_unreachable();
+    }
+    __builtin_unreachable();
+}
+
+void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const long size, uint32_t x_offset, uint32_t y_offset) {
+    if(size<54) // data smaller than header
+        return;
+
+    const uint32_t bfOffBits=ssd1306_bmp_get_val(data, 10, 4);
+    const uint32_t biSize=ssd1306_bmp_get_val(data, 14, 4);
+    const int32_t biWidth=(int32_t) ssd1306_bmp_get_val(data, 18, 4);
+    const int32_t biHeight=(int32_t) ssd1306_bmp_get_val(data, 22, 4);
+    const uint16_t biBitCount=(uint16_t) ssd1306_bmp_get_val(data, 28, 2);
+    const uint32_t biCompression=ssd1306_bmp_get_val(data, 30, 4);
+
+    if(biBitCount!=1) // image not monochrome
+        return;
+
+    if(biCompression!=0) // image compressed
+        return;
+
+    const int table_start=14+biSize;
+    uint8_t color_val;
+
+    for(uint8_t i=0; i<2; ++i) {
+        if(!((data[table_start+i*4]<<16)|(data[table_start+i*4+1]<<8)|data[table_start+i*4+2])) {
+            color_val=i;
+            break;
+        }
+    }
+
+    uint32_t bytes_per_line=(biWidth/8)+(biWidth&7?1:0);
+    if(bytes_per_line&3)
+        bytes_per_line=(bytes_per_line^(bytes_per_line&3))+4;
+
+    const uint8_t *img_data=data+bfOffBits;
+
+    int step=biHeight>0?-1:1;
+    int border=biHeight>0?-1:biHeight;
+    for(uint32_t y=biHeight>0?biHeight-1:0; y!=border; y+=step) {
+        for(uint32_t x=0; x<biWidth; ++x) {
+            if(((img_data[x>>3]>>(7-(x&7)))&1)==color_val)
+                ssd1306_draw_pixel(p, x_offset+x, y_offset+y);
+        }
+        img_data+=bytes_per_line;
+    }
+}
+
+inline void ssd1306_bmp_show_image(ssd1306_t *p, const uint8_t *data, const long size) {
+    ssd1306_bmp_show_image_with_offset(p, data, size, 0, 0);
+}
+
 void ssd1306_show(ssd1306_t *p) {
     uint8_t payload[]= {SET_COL_ADDR, 0, p->width-1, SET_PAGE_ADDR, 0, p->pages-1};
     if(p->width==64) {
