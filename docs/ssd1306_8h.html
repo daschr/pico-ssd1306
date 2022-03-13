@@ -156,6 +156,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a1b29ebae6f5fe92bec95abb09795e488"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a1b29ebae6f5fe92bec95abb09795e488">ssd13606_draw_empty_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
 <tr class="memdesc:a1b29ebae6f5fe92bec95abb09795e488"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw empty square at given position with given size  <a href="ssd1306_8h.html#a1b29ebae6f5fe92bec95abb09795e488">More...</a><br /></td></tr>
 <tr class="separator:a1b29ebae6f5fe92bec95abb09795e488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1624a5ea20392d5614b84094e94160b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a1624a5ea20392d5614b84094e94160b0">ssd1306_bmp_show_image_with_offset</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, const uint8_t *data, const long size, uint32_t x_offset, uint32_t y_offset)</td></tr>
+<tr class="memdesc:a1624a5ea20392d5614b84094e94160b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw monochrome bitmap with offset  <a href="ssd1306_8h.html#a1624a5ea20392d5614b84094e94160b0">More...</a><br /></td></tr>
+<tr class="separator:a1624a5ea20392d5614b84094e94160b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89d1f4edb34d5860df01a62512cc3949"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a89d1f4edb34d5860df01a62512cc3949">ssd1306_bmp_show_image</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, const uint8_t *data, const long size)</td></tr>
+<tr class="memdesc:a89d1f4edb34d5860df01a62512cc3949"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw monochrome bitmap  <a href="ssd1306_8h.html#a89d1f4edb34d5860df01a62512cc3949">More...</a><br /></td></tr>
+<tr class="separator:a89d1f4edb34d5860df01a62512cc3949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48309e637d7621f73446b37d8728e085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a48309e637d7621f73446b37d8728e085">ssd1306_draw_char_with_font</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char c)</td></tr>
 <tr class="memdesc:a48309e637d7621f73446b37d8728e085"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw char with given font  <a href="ssd1306_8h.html#a48309e637d7621f73446b37d8728e085">More...</a><br /></td></tr>
 <tr class="separator:a48309e637d7621f73446b37d8728e085"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +178,116 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>simple driver for ssd1306 displays </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a89d1f4edb34d5860df01a62512cc3949"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89d1f4edb34d5860df01a62512cc3949">&#9670;&nbsp;</a></span>ssd1306_bmp_show_image()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_bmp_show_image </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>draw monochrome bitmap </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>: image data (whole file) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>: size of image data in bytes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1624a5ea20392d5614b84094e94160b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1624a5ea20392d5614b84094e94160b0">&#9670;&nbsp;</a></span>ssd1306_bmp_show_image_with_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_bmp_show_image_with_offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>x_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>y_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>draw monochrome bitmap with offset </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>: image data (whole file) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>: size of image data in bytes </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x_offset</td><td>: offset of horizontal coordinate </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y_offset</td><td>: offset of vertical coordinate </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a82fc78675d097e37985dfa8c6672dd58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82fc78675d097e37985dfa8c6672dd58">&#9670;&nbsp;</a></span>ssd1306_clear()</h2>
 
