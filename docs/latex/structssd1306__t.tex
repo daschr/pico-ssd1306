@@ -1,0 +1,89 @@
+\hypertarget{structssd1306__t}{}\doxysection{ssd1306\+\_\+t Struct Reference}
+\label{structssd1306__t}\index{ssd1306\_t@{ssd1306\_t}}
+
+
+holds the configuration  
+
+
+
+
+{\ttfamily \#include $<$ssd1306.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structssd1306__t_a62a19e1b4abdecca7b98a28a3f8bf314}{width}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structssd1306__t_a966cf732ff8115ad6970853bdfed44a5}{height}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structssd1306__t_a1c182da834a4e266af77684a66b6e0b8}{pages}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structssd1306__t_ab889bd4c012a67785f381dce671badfd}{address}}
+\item 
+i2c\+\_\+inst\+\_\+t $\ast$ \mbox{\hyperlink{structssd1306__t_a445e0fb84b103da5b6414be70ea627ad}{i2c\+\_\+i}}
+\item 
+bool \mbox{\hyperlink{structssd1306__t_a6a21df12c17f2611931c25121dae3df8}{external\+\_\+vcc}}
+\item 
+uint8\+\_\+t $\ast$ \mbox{\hyperlink{structssd1306__t_a1b1a335ef207a588217c7a948c8b9449}{buffer}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structssd1306__t_a2774df9383033b99d80b56552bba0464}{bufsize}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+holds the configuration 
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structssd1306__t_ab889bd4c012a67785f381dce671badfd}\label{structssd1306__t_ab889bd4c012a67785f381dce671badfd}} 
+\index{ssd1306\_t@{ssd1306\_t}!address@{address}}
+\index{address@{address}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{address}{address}}
+{\footnotesize\ttfamily uint8\+\_\+t ssd1306\+\_\+t\+::address}
+
+i2c address of display \mbox{\Hypertarget{structssd1306__t_a1b1a335ef207a588217c7a948c8b9449}\label{structssd1306__t_a1b1a335ef207a588217c7a948c8b9449}} 
+\index{ssd1306\_t@{ssd1306\_t}!buffer@{buffer}}
+\index{buffer@{buffer}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily uint8\+\_\+t$\ast$ ssd1306\+\_\+t\+::buffer}
+
+display buffer \mbox{\Hypertarget{structssd1306__t_a2774df9383033b99d80b56552bba0464}\label{structssd1306__t_a2774df9383033b99d80b56552bba0464}} 
+\index{ssd1306\_t@{ssd1306\_t}!bufsize@{bufsize}}
+\index{bufsize@{bufsize}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{bufsize}{bufsize}}
+{\footnotesize\ttfamily size\+\_\+t ssd1306\+\_\+t\+::bufsize}
+
+buffer size \mbox{\Hypertarget{structssd1306__t_a6a21df12c17f2611931c25121dae3df8}\label{structssd1306__t_a6a21df12c17f2611931c25121dae3df8}} 
+\index{ssd1306\_t@{ssd1306\_t}!external\_vcc@{external\_vcc}}
+\index{external\_vcc@{external\_vcc}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{external\_vcc}{external\_vcc}}
+{\footnotesize\ttfamily bool ssd1306\+\_\+t\+::external\+\_\+vcc}
+
+whether display uses external vcc \mbox{\Hypertarget{structssd1306__t_a966cf732ff8115ad6970853bdfed44a5}\label{structssd1306__t_a966cf732ff8115ad6970853bdfed44a5}} 
+\index{ssd1306\_t@{ssd1306\_t}!height@{height}}
+\index{height@{height}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily uint8\+\_\+t ssd1306\+\_\+t\+::height}
+
+height of display \mbox{\Hypertarget{structssd1306__t_a445e0fb84b103da5b6414be70ea627ad}\label{structssd1306__t_a445e0fb84b103da5b6414be70ea627ad}} 
+\index{ssd1306\_t@{ssd1306\_t}!i2c\_i@{i2c\_i}}
+\index{i2c\_i@{i2c\_i}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{i2c\_i}{i2c\_i}}
+{\footnotesize\ttfamily i2c\+\_\+inst\+\_\+t$\ast$ ssd1306\+\_\+t\+::i2c\+\_\+i}
+
+i2c connection instance \mbox{\Hypertarget{structssd1306__t_a1c182da834a4e266af77684a66b6e0b8}\label{structssd1306__t_a1c182da834a4e266af77684a66b6e0b8}} 
+\index{ssd1306\_t@{ssd1306\_t}!pages@{pages}}
+\index{pages@{pages}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{pages}{pages}}
+{\footnotesize\ttfamily uint8\+\_\+t ssd1306\+\_\+t\+::pages}
+
+stores pages of display (calculated on initialization \mbox{\Hypertarget{structssd1306__t_a62a19e1b4abdecca7b98a28a3f8bf314}\label{structssd1306__t_a62a19e1b4abdecca7b98a28a3f8bf314}} 
+\index{ssd1306\_t@{ssd1306\_t}!width@{width}}
+\index{width@{width}!ssd1306\_t@{ssd1306\_t}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily uint8\+\_\+t ssd1306\+\_\+t\+::width}
+
+width of display 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ssd1306_8h}{ssd1306.\+h}}\end{DoxyCompactItemize}
