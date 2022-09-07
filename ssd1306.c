@@ -33,8 +33,8 @@ SOFTWARE.
 #include "ssd1306.h"
 #include "font.h"
 
-inline static void swap(uint32_t *a, uint32_t *b) {
-    uint32_t *t=a;
+inline static void swap(int32_t *a, int32_t *b) {
+    int32_t *t=a;
     *a=*b;
     *b=*t;
 }
@@ -190,7 +190,7 @@ void ssd1306_draw_char_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t 
         uint8_t line=(uint8_t)(font[(c-0x20)*font[1]+i+2]);
 
         for(int8_t j=0; j<font[0]; ++j, line>>=1) {
-            if(line & 1 ==1)
+            if((line & 1) ==1)
                 ssd1306_draw_square(p, x+i*scale, y+j*scale, scale, scale);
         }
     }
