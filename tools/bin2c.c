@@ -2,30 +2,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
 #define BUFSIZE 256
 
-void convert_to_char_array(FILE *in, FILE *out) {
+void normalize_name(char *name) {
+    for(size_t i=0; name[i]!=0;) {
+        if('a'<=name[i]&&name[i]<='z')
+            goto next;
+        else if('A'<=name[i]&&name[i]<='Z')
+            goto next;
+        else if('0'<=name[i]&&name[i]<='9')
+            goto next;
+        else
+            name[i]='_';
+next:
+        ++i;
+    }
+}
+
+void convert_to_char_array(const char *name, FILE *in, FILE *out) {
     fseek(in, 0, SEEK_END);
     size_t file_size=ftell(in);
     fseek(in, 0, SEEK_SET);
 
-    fprintf(out, "const unsigned long data_size=%lu;", file_size);
+    fprintf(out, "const unsigned long %s_size=%lu;\n", name, file_size);
     uint8_t buf[BUFSIZE];
     size_t read_bytes, wrote_bytes=0;
 
-    fprintf(out, "unsigned char data[]={\n");
+    fprintf(out, "unsigned char %s_data[]={\n", name);
 
     do {
         read_bytes=fread(buf, 1, BUFSIZE, in);
 
         for(size_t i=0; i<read_bytes;) {
-			if(++wrote_bytes<file_size)
-            	fprintf(out, "0x%02x,", buf[i]);
-			else
-            	fprintf(out, "0x%02x", buf[i]);
+            if(++wrote_bytes<file_size)
+                fprintf(out, "0x%02x,", buf[i]);
+            else
+                fprintf(out, "0x%02x", buf[i]);
             ++i;
-			if(((i&15)==0)&&i>0)
+            if(((i&15)==0)&&i>0)
                 fprintf(out, "\n");
         }
     } while(read_bytes==BUFSIZE);
@@ -53,7 +69,12 @@ int main(int ac, char *as[]) {
     } else
         out=stdout;
 
-    convert_to_char_array(in, out);
+    char *norm_name=strdup(as[1]);
+    normalize_name(norm_name);
+
+    convert_to_char_array(norm_name, in, out);
+
+    free(norm_name);
 
     fclose(in);
     fclose(out);
