@@ -25,7 +25,7 @@ For converting an image to the supported format, you can do the following:
 * install [ImageMagick](https://imagemagick.org/)
 * use `convert you_image.png -monochrome your_image.bmp`
 
-For embedding your image, you canuse tools like *bin2c* (included in the *hxtools* package on Debian).
+For embedding your image, you can use tools like *bin2c* (included in the *hxtools* package on Debian).
 
 Alternatively, you can you the version included in this repo:
 
