@@ -76,37 +76,37 @@ bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address
     ++(p->buffer);
 
     // from https://github.com/makerportal/rpi-pico-ssd1306
-    int8_t cmds[]= {
-        SET_DISP | 0x00,  // off
-        // address setting
-        SET_MEM_ADDR,
-        0x00,  // horizontal
-        // resolution and layout
-        SET_DISP_START_LINE | 0x00,
-        SET_SEG_REMAP | 0x01,  // column addr 127 mapped to SEG0
-        SET_MUX_RATIO,
-        height - 1,
-        SET_COM_OUT_DIR | 0x08,  // scan from COM[N] to COM0
-        SET_DISP_OFFSET,
-        0x00,
-        SET_COM_PIN_CFG,
-        width>2*height?0x02:0x12,
+    uint8_t cmds[]= {
+        SET_DISP,
         // timing and driving scheme
         SET_DISP_CLK_DIV,
         0x80,
-        SET_PRECHARGE,
-        p->external_vcc?0x22:0xF1,
-        SET_VCOM_DESEL,
-        0x30,  // 0.83*Vcc
-        // display
-        SET_CONTRAST,
-        0xFF,  // maximum
-        SET_ENTIRE_ON,  // output follows RAM contents
-        SET_NORM_INV,  // not inverted
+        SET_MUX_RATIO,
+        height - 1,
+        SET_DISP_OFFSET,
+        0x00,
+        // resolution and layout
+        SET_DISP_START_LINE,
         // charge pump
         SET_CHARGE_PUMP,
         p->external_vcc?0x10:0x14,
-        SET_DISP | 0x01
+        SET_SEG_REMAP | 0x01,           // column addr 127 mapped to SEG0
+        SET_COM_OUT_DIR | 0x08,         // scan from COM[N] to COM0
+        SET_COM_PIN_CFG,
+        width>2*height?0x02:0x12,
+        // display
+        SET_CONTRAST,
+        0xff,
+        SET_PRECHARGE,
+        p->external_vcc?0x22:0xF1,
+        SET_VCOM_DESEL,
+        0x30,                           // or 0x40?
+        SET_ENTIRE_ON,                  // output follows RAM contents
+        SET_NORM_INV,                   // not inverted
+        SET_DISP | 0x01,
+        // address setting
+        SET_MEM_ADDR,
+        0x00,  // horizontal
     };
 
     for(size_t i=0; i<sizeof(cmds); ++i)
