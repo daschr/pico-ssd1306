@@ -183,21 +183,27 @@ void ssd13606_draw_empty_square(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t w
 }
 
 void ssd1306_draw_char_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char c) {
-    if(c > '~')
+    if(c<font[3]||c>font[4])
         return;
 
-    for(uint8_t i=0; i<font[1]; ++i) {
-        uint8_t line=(uint8_t)(font[(c-0x20)*font[1]+i+2]);
+	uint32_t parts_per_line=(font[0]>>3)+!(font[0]&7);
+    for(uint8_t w=0; w<font[1]; ++w) { // width
+		uint32_t pp=(c-font[3])*font[1]*parts_per_line+w*parts_per_line+6;
+		for(uint32_t lp=0;lp<parts_per_line;++lp){
+			const uint8_t line=font[pp];
+			
+			for(int8_t j=0; j<8; ++j, line>>=1) {
+            	if(line & 1)
+            	    ssd1306_draw_square(p, x+w*scale, y+((lp<<3)+j)*scale, scale, scale);
+				}
 
-        for(int8_t j=0; j<font[0]; ++j, line>>=1) {
-            if(line & 1)
-                ssd1306_draw_square(p, x+i*scale, y+j*scale, scale, scale);
-        }
+			++pp;
+		}
     }
 }
 
 void ssd1306_draw_string_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char *s) {
-    for(int32_t x_n=x; *s; x_n+=font[0]*scale) {
+    for(int32_t x_n=x; *s; x_n+=(font[1]+font[2])*scale) {
         ssd1306_draw_char_with_font(p, x_n, y, scale, font, *(s++));
     }
 }

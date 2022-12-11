@@ -1,9 +1,15 @@
 #ifndef _inc_font
 #define _inc_font
 
+/*
+ * Format
+ * <height>, <width>, <additional spacing per char>, 
+ * <first ascii char>, <last ascii char>,
+ * <data>
+ */
 const uint8_t font_8x5[] =
 {
-			8, 5, //height, width
+			8, 5, 2, 0, 32, 126,
 			0x00, 0x00, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x5F, 0x00, 0x00,
 			0x00, 0x07, 0x00, 0x07, 0x00,
