@@ -6,6 +6,13 @@
 
 #include "ssd1306.h"
 #include "image.h"
+#include "acme_5_outlines_font.h"
+#include "bubblesstandard_font.h"
+#include "crackers_font.h"
+#include "BMSPA_font.h"
+
+const uint8_t num_chars_per_disp[]={7,7,7,5};
+const uint8_t *fonts[4]= {acme_font, bubblesstandard_font, crackers_font, BMSPA_font};
 
 #define SLEEPTIME 25
 
@@ -35,7 +42,7 @@ void setup_gpios(void) {
 
 
 void animation(void) {
-    char *words[]= {"SSD1306", "DISPLAY", "DRIVER"};
+    const char *words[]= {"SSD1306", "DISPLAY", "DRIVER"};
 
     ssd1306_t disp;
     disp.external_vcc=false;
@@ -44,6 +51,7 @@ void animation(void) {
 
     printf("ANIMATION!\n");
 
+    char buf[8];
 
     for(;;) {
         for(int y=0; y<31; ++y) {
@@ -74,6 +82,24 @@ void animation(void) {
             ssd1306_show(&disp);
             sleep_ms(SLEEPTIME);
             ssd1306_clear(&disp);
+        }
+
+        for(size_t font_i=0; font_i<sizeof(fonts)/sizeof(fonts[0]); ++font_i) {
+            uint8_t c=32;
+            while(c<=126) {
+                uint8_t i=0;
+                for(; i<num_chars_per_disp[font_i]; ++i) {
+                    if(c>126)
+                        break;
+                    buf[i]=c++;
+                }
+                buf[i]=0;
+
+                ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[font_i], buf);
+                ssd1306_show(&disp);
+                sleep_ms(800);
+                ssd1306_clear(&disp);
+            }
         }
 
         ssd1306_bmp_show_image(&disp, image_data, image_size);
