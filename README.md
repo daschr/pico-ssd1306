@@ -34,3 +34,17 @@ Alternatively, you can you the version included in this repo:
 * usage: `./bin2c your_image.bmp your_image.h`
 
 You may also take a look at the example in the *example/* directory.
+
+## Fonts
+
+You can also use or own fonts when drawing with *ssd1306_draw_char_with_font* or *ssd1306_draw_string_with_font*.
+The format is:
+ 1. a 1-D uint8_t array
+ 2. structure of the array:
+    1. the first element of the array is the *height*
+    2. the second element of the array is the *height*
+    3. the third element of the array is the *additional spacing between chars*
+    4. the fourth element of the array is the *the first ascii character, this array stores*
+    5. the fifth element of the array is the *the last ascii character, this array stores*
+    6. the following elements encode the pixels of the characters vertically line by line ([see](https://jared.geek.nz/2014/jan/custom-fonts-for-microcontrollers#drawing-fonts)); a line can be encoded as more than one `uint8_t` values, when the *height* is greater than 8;
+please look at `font.h` and the fonts in the `example/` directory
