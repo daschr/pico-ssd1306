@@ -126,6 +126,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a56995249d6623b978ed8e943b4f156be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a56995249d6623b978ed8e943b4f156be">ssd1306_init</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance)</td></tr>
 <tr class="memdesc:a56995249d6623b978ed8e943b4f156be"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize display  <a href="ssd1306_8h.html#a56995249d6623b978ed8e943b4f156be">More...</a><br /></td></tr>
 <tr class="separator:a56995249d6623b978ed8e943b4f156be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7146d350e392ebc2556280d0fde1ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a8d7146d350e392ebc2556280d0fde1ca">ssd1306_deinit</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p)</td></tr>
+<tr class="memdesc:a8d7146d350e392ebc2556280d0fde1ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">deinitialize display  <a href="ssd1306_8h.html#a8d7146d350e392ebc2556280d0fde1ca">More...</a><br /></td></tr>
+<tr class="separator:a8d7146d350e392ebc2556280d0fde1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6b0fb58a6636463ec76c93c05e26e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#ab6b0fb58a6636463ec76c93c05e26e02">ssd1306_poweroff</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p)</td></tr>
 <tr class="memdesc:ab6b0fb58a6636463ec76c93c05e26e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">turn off display  <a href="ssd1306_8h.html#ab6b0fb58a6636463ec76c93c05e26e02">More...</a><br /></td></tr>
 <tr class="separator:ab6b0fb58a6636463ec76c93c05e26e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,12 +171,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a6de844e85019c62e2b094e5598bd18df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a6de844e85019c62e2b094e5598bd18df">ssd1306_draw_char</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, char c)</td></tr>
 <tr class="memdesc:a6de844e85019c62e2b094e5598bd18df"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw char with builtin font  <a href="ssd1306_8h.html#a6de844e85019c62e2b094e5598bd18df">More...</a><br /></td></tr>
 <tr class="separator:a6de844e85019c62e2b094e5598bd18df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca7ce559d7304caf266976cf30271b22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#aca7ce559d7304caf266976cf30271b22">ssd1306_draw_string_with_font</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char *s)</td></tr>
-<tr class="memdesc:aca7ce559d7304caf266976cf30271b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw string with given font  <a href="ssd1306_8h.html#aca7ce559d7304caf266976cf30271b22">More...</a><br /></td></tr>
-<tr class="separator:aca7ce559d7304caf266976cf30271b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6441ff6ddbdf1554c599c6a266378644"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a6441ff6ddbdf1554c599c6a266378644">ssd1306_draw_string</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, char *s)</td></tr>
-<tr class="memdesc:a6441ff6ddbdf1554c599c6a266378644"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw string with builtin font  <a href="ssd1306_8h.html#a6441ff6ddbdf1554c599c6a266378644">More...</a><br /></td></tr>
-<tr class="separator:a6441ff6ddbdf1554c599c6a266378644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7aa75a6430ec1c501d233b3aaeafd8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#ad7aa75a6430ec1c501d233b3aaeafd8d">ssd1306_draw_string_with_font</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, const char *s)</td></tr>
+<tr class="memdesc:ad7aa75a6430ec1c501d233b3aaeafd8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw string with given font  <a href="ssd1306_8h.html#ad7aa75a6430ec1c501d233b3aaeafd8d">More...</a><br /></td></tr>
+<tr class="separator:ad7aa75a6430ec1c501d233b3aaeafd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fa45ef8fd75cb3ff1b1c2378d064266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a4fa45ef8fd75cb3ff1b1c2378d064266">ssd1306_draw_string</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t scale, const char *s)</td></tr>
+<tr class="memdesc:a4fa45ef8fd75cb3ff1b1c2378d064266"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw string with builtin font  <a href="ssd1306_8h.html#a4fa45ef8fd75cb3ff1b1c2378d064266">More...</a><br /></td></tr>
+<tr class="separator:a4fa45ef8fd75cb3ff1b1c2378d064266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>simple driver for ssd1306 displays </p>
@@ -361,6 +364,40 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>: contrast </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8d7146d350e392ebc2556280d0fde1ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7146d350e392ebc2556280d0fde1ca">&#9670;&nbsp;</a></span>ssd1306_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_deinit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>deinitialize display </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
   </table>
   </dd>
 </dl>
@@ -650,8 +687,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6441ff6ddbdf1554c599c6a266378644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6441ff6ddbdf1554c599c6a266378644">&#9670;&nbsp;</a></span>ssd1306_draw_string()</h2>
+<a id="a4fa45ef8fd75cb3ff1b1c2378d064266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fa45ef8fd75cb3ff1b1c2378d064266">&#9670;&nbsp;</a></span>ssd1306_draw_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +720,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>s</em>&#160;</td>
         </tr>
         <tr>
@@ -708,8 +745,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aca7ce559d7304caf266976cf30271b22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca7ce559d7304caf266976cf30271b22">&#9670;&nbsp;</a></span>ssd1306_draw_string_with_font()</h2>
+<a id="ad7aa75a6430ec1c501d233b3aaeafd8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7aa75a6430ec1c501d233b3aaeafd8d">&#9670;&nbsp;</a></span>ssd1306_draw_string_with_font()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -747,7 +784,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>s</em>&#160;</td>
         </tr>
         <tr>
