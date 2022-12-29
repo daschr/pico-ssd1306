@@ -86,6 +86,14 @@ typedef struct {
 bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance);
 
 /**
+*	@brief deinitialize display
+*
+*	@param[in] p : instance of display
+*
+*/
+void ssd1306_deinit(ssd1306_t *p);
+
+/**
 *	@brief turn off display
 *
 *	@param[in] p : instance of display
