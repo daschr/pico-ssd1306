@@ -156,9 +156,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a77731d3dfec84511f7b1b8205cc764c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a77731d3dfec84511f7b1b8205cc764c3">ssd1306_draw_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
 <tr class="memdesc:a77731d3dfec84511f7b1b8205cc764c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw filled square at given position with given size  <a href="ssd1306_8h.html#a77731d3dfec84511f7b1b8205cc764c3">More...</a><br /></td></tr>
 <tr class="separator:a77731d3dfec84511f7b1b8205cc764c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b29ebae6f5fe92bec95abb09795e488"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a1b29ebae6f5fe92bec95abb09795e488">ssd13606_draw_empty_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
-<tr class="memdesc:a1b29ebae6f5fe92bec95abb09795e488"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw empty square at given position with given size  <a href="ssd1306_8h.html#a1b29ebae6f5fe92bec95abb09795e488">More...</a><br /></td></tr>
-<tr class="separator:a1b29ebae6f5fe92bec95abb09795e488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e33dec03c4741e2771987b20f026ebf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a4e33dec03c4741e2771987b20f026ebf">ssd1306_draw_empty_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
+<tr class="memdesc:a4e33dec03c4741e2771987b20f026ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw empty square at given position with given size  <a href="ssd1306_8h.html#a4e33dec03c4741e2771987b20f026ebf">More...</a><br /></td></tr>
+<tr class="separator:a4e33dec03c4741e2771987b20f026ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1624a5ea20392d5614b84094e94160b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a1624a5ea20392d5614b84094e94160b0">ssd1306_bmp_show_image_with_offset</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, const uint8_t *data, const long size, uint32_t x_offset, uint32_t y_offset)</td></tr>
 <tr class="memdesc:a1624a5ea20392d5614b84094e94160b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw monochrome bitmap with offset  <a href="ssd1306_8h.html#a1624a5ea20392d5614b84094e94160b0">More...</a><br /></td></tr>
 <tr class="separator:a1624a5ea20392d5614b84094e94160b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -521,6 +521,64 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">scale</td><td>: scale font to n times of original size (default should be 1) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">font</td><td>: pointer to font </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>: character to draw </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4e33dec03c4741e2771987b20f026ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e33dec03c4741e2771987b20f026ebf">&#9670;&nbsp;</a></span>ssd1306_draw_empty_square()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_draw_empty_square </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>draw empty square at given position with given size </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: x position of starting point </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>: y position of starting point </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>: width of square </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>: height of square </td></tr>
   </table>
   </dd>
 </dl>
@@ -1009,64 +1067,6 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a1b29ebae6f5fe92bec95abb09795e488"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b29ebae6f5fe92bec95abb09795e488">&#9670;&nbsp;</a></span>ssd13606_draw_empty_square()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ssd13606_draw_empty_square </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>draw empty square at given position with given size </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: x position of starting point </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>: y position of starting point </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>: width of square </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>: height of square </td></tr>
   </table>
   </dd>
 </dl>
