@@ -140,6 +140,12 @@ inline void ssd1306_clear(ssd1306_t *p) {
     memset(p->buffer, 0, p->bufsize);
 }
 
+void ssd1306_clear_pixel(ssd1306_t *p, uint32_t x, uint32_t y) {
+    if(x>=p->width || y>=p->height) return;
+
+    p->buffer[x+p->width*(y>>3)]&=~(0x1<<(y&0x07));
+}
+
 void ssd1306_draw_pixel(ssd1306_t *p, uint32_t x, uint32_t y) {
     if(x>=p->width || y>=p->height) return;
 
