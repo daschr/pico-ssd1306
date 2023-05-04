@@ -147,6 +147,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a82fc78675d097e37985dfa8c6672dd58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a82fc78675d097e37985dfa8c6672dd58">ssd1306_clear</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p)</td></tr>
 <tr class="memdesc:a82fc78675d097e37985dfa8c6672dd58"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear display buffer  <a href="ssd1306_8h.html#a82fc78675d097e37985dfa8c6672dd58">More...</a><br /></td></tr>
 <tr class="separator:a82fc78675d097e37985dfa8c6672dd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac328fa69f7ed547cb1cd62f9e65e8067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#ac328fa69f7ed547cb1cd62f9e65e8067">ssd1306_clear_pixel</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y)</td></tr>
+<tr class="memdesc:ac328fa69f7ed547cb1cd62f9e65e8067"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear pixel on buffer  <a href="ssd1306_8h.html#ac328fa69f7ed547cb1cd62f9e65e8067">More...</a><br /></td></tr>
+<tr class="separator:ac328fa69f7ed547cb1cd62f9e65e8067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c875fba9869eaa52e27cf325da57147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a7c875fba9869eaa52e27cf325da57147">ssd1306_draw_pixel</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y)</td></tr>
 <tr class="memdesc:a7c875fba9869eaa52e27cf325da57147"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw pixel on buffer  <a href="ssd1306_8h.html#a7c875fba9869eaa52e27cf325da57147">More...</a><br /></td></tr>
 <tr class="separator:a7c875fba9869eaa52e27cf325da57147"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,6 +322,50 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac328fa69f7ed547cb1cd62f9e65e8067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac328fa69f7ed547cb1cd62f9e65e8067">&#9670;&nbsp;</a></span>ssd1306_clear_pixel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_clear_pixel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clear pixel on buffer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: x position </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>: y position </td></tr>
   </table>
   </dd>
 </dl>
