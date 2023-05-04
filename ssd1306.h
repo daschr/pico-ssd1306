@@ -144,6 +144,15 @@ void ssd1306_show(ssd1306_t *p);
 void ssd1306_clear(ssd1306_t *p);
 
 /**
+	@brief clear pixel on buffer
+
+	@param[in] p : instance of display
+	@param[in] x : x position
+	@param[in] y : y position
+*/
+void ssd1306_clear_pixel(ssd1306_t *p, uint32_t x, uint32_t y);
+
+/**
 	@brief draw pixel on buffer
 
 	@param[in] p : instance of display
