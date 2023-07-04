@@ -42,7 +42,7 @@ The format is:
  1. a 1-D uint8_t array
  2. structure of the array:
     1. the first element of the array is the *height*
-    2. the second element of the array is the *height*
+    2. the second element of the array is the *width*
     3. the third element of the array is the *additional spacing between chars*
     4. the fourth element of the array is the *the first ascii character, this array stores*
     5. the fifth element of the array is the *the last ascii character, this array stores*
