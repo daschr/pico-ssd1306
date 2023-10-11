@@ -254,7 +254,7 @@ void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const
         return;
 
     const int table_start=14+biSize;
-    uint8_t color_val;
+    uint8_t color_val=0;
 
     for(uint8_t i=0; i<2; ++i) {
         if(!((data[table_start+i*4]<<16)|(data[table_start+i*4+1]<<8)|data[table_start+i*4+2])) {
@@ -269,10 +269,11 @@ void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const
 
     const uint8_t *img_data=data+bfOffBits;
 
-    int step=biHeight>0?-1:1;
-    int border=biHeight>0?-1:biHeight;
-    for(uint32_t y=biHeight>0?biHeight-1:0; y!=border; y+=step) {
-        for(uint32_t x=0; x<biWidth; ++x) {
+    int32_t step=biHeight>0?-1:1;
+    int32_t border=biHeight>0?-1:biHeight;
+
+    for(uint32_t y=biHeight>0?biHeight-1:0; y!=(uint32_t)border; y+=step) {
+        for(uint32_t x=0; x<(uint32_t)biWidth; ++x) {
             if(((img_data[x>>3]>>(7-(x&7)))&1)==color_val)
                 ssd1306_draw_pixel(p, x_offset+x, y_offset+y);
         }
