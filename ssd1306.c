@@ -242,7 +242,7 @@ void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const
 
     const uint32_t bfOffBits=ssd1306_bmp_get_val(data, 10, 4);
     const uint32_t biSize=ssd1306_bmp_get_val(data, 14, 4);
-    const int32_t biWidth=(int32_t) ssd1306_bmp_get_val(data, 18, 4);
+    const uint32_t biWidth=ssd1306_bmp_get_val(data, 18, 4);
     const int32_t biHeight=(int32_t) ssd1306_bmp_get_val(data, 22, 4);
     const uint16_t biBitCount=(uint16_t) ssd1306_bmp_get_val(data, 28, 2);
     const uint32_t biCompression=ssd1306_bmp_get_val(data, 30, 4);
@@ -270,10 +270,10 @@ void ssd1306_bmp_show_image_with_offset(ssd1306_t *p, const uint8_t *data, const
     const uint8_t *img_data=data+bfOffBits;
 
     int32_t step=biHeight>0?-1:1;
-    int32_t border=biHeight>0?-1:biHeight;
+    int32_t border=biHeight>0?-1:-biHeight;
 
     for(uint32_t y=biHeight>0?biHeight-1:0; y!=(uint32_t)border; y+=step) {
-        for(uint32_t x=0; x<(uint32_t)biWidth; ++x) {
+        for(uint32_t x=0; x<biWidth; ++x) {
             if(((img_data[x>>3]>>(7-(x&7)))&1)==color_val)
                 ssd1306_draw_pixel(p, x_offset+x, y_offset+y);
         }
