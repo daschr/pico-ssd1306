@@ -162,7 +162,7 @@ void ssd1306_clear_pixel(ssd1306_t *p, uint32_t x, uint32_t y);
 void ssd1306_draw_pixel(ssd1306_t *p, uint32_t x, uint32_t y);
 
 /**
-	@brief draw pixel on buffer
+	@brief draw line on buffer
 
 	@param[in] p : instance of display
 	@param[in] x1 : x position of starting point
