@@ -57,6 +57,17 @@ typedef enum {
 } ssd1306_command_t;
 
 /**
+ * @brief defines rotations/orientations
+ */
+typedef enum {
+    ROT_0 = 0,
+    ROT_90 = 1,
+    ROT_180 = 2,
+    ROT_270 = 3,
+} rotation_t;
+
+
+/**
 *	@brief holds the configuration
 */
 typedef struct {
@@ -68,6 +79,7 @@ typedef struct {
     bool external_vcc; 	/**< whether display uses external vcc */ 
     uint8_t *buffer;	/**< display buffer */
     size_t bufsize;		/**< buffer size */
+    rotation_t rotation; /**< rotation of display */
 } ssd1306_t;
 
 /**
@@ -142,6 +154,14 @@ void ssd1306_show(ssd1306_t *p);
 
 */
 void ssd1306_clear(ssd1306_t *p);
+
+/**
+  @brief sets the rotation for
+
+  @param[in] p : instance of display
+  @param[in] rotation : rotation angle
+*/
+void ssd1306_set_rotation(ssd1306_t *p, rotation_t rotation);
 
 /**
 	@brief clear pixel on buffer
