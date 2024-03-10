@@ -30,6 +30,7 @@ SOFTWARE.
 
 #ifndef _inc_ssd1306
 #define _inc_ssd1306
+#include <stdint.h>
 #include <pico/stdlib.h>
 #include <hardware/i2c.h>
 
@@ -238,17 +239,6 @@ void ssd1306_bmp_show_image(ssd1306_t *p, const uint8_t *data, const long size);
 void ssd1306_draw_char_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char c);
 
 /**
-	@brief draw char with builtin font
-
-	@param[in] p : instance of display
-	@param[in] x : x starting position of char
-	@param[in] y : y starting position of char
-	@param[in] scale : scale font to n times of original size (default should be 1)
-	@param[in] c : character to draw
-*/
-void ssd1306_draw_char(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, char c);
-
-/**
 	@brief draw string with given font
 
 	@param[in] p : instance of display
@@ -261,14 +251,16 @@ void ssd1306_draw_char(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, cha
 void ssd1306_draw_string_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, const char *s );
 
 /**
-	@brief draw string with builtin font
+	@brief Blit a sprite into the display buffer
 
-	@param[in] p : instance of display
-	@param[in] x : x starting position of text
-	@param[in] y : y starting position of text
-	@param[in] scale : scale font to n times of original size (default should be 1)
-	@param[in] s : text to draw
-*/
-void ssd1306_draw_string(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const char *s);
-
+	@param[in] disp : instance of display with display buffer
+	@param[in] sprite : the buffer containing the sprite (padded if necessary)
+	@param[in] sprite_height : the height of the sprite in pixels
+	@param[in] sprite_width : the width of the sprite in pixels (number of columns)
+	@param[in] start_col : the column on the display containing the top left corner of the sprite
+	@param[in] start_row : the row containing the top left corner of the sprite
+ */
+void ssd1306_blit(ssd1306_t *disp, const char* sprite,
+		  uint32_t sprite_height, uint32_t sprite_width,
+		  uint32_t start_col, uint32_t start_row);
 #endif

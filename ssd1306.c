@@ -219,14 +219,6 @@ void ssd1306_draw_string_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_
     }
 }
 
-void ssd1306_draw_char(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, char c) {
-    ssd1306_draw_char_with_font(p, x, y, scale, font_8x5, c);
-}
-
-void ssd1306_draw_string(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const char *s) {
-    ssd1306_draw_string_with_font(p, x, y, scale, font_8x5, s);
-}
-
 static inline uint32_t ssd1306_bmp_get_val(const uint8_t *data, const size_t offset, uint8_t size) {
     switch(size) {
     case 1:
