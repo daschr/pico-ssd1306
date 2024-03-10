@@ -7,6 +7,7 @@ include(pico_sdk_import.cmake)
 project(ssd1306-example)
 
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
