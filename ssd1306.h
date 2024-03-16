@@ -30,6 +30,7 @@ SOFTWARE.
 
 #ifndef _inc_ssd1306
 #define _inc_ssd1306
+#include <stdint.h>
 #include <pico/stdlib.h>
 #include <hardware/i2c.h>
 
@@ -56,20 +57,61 @@ typedef enum {
     SET_CHARGE_PUMP = 0x8D
 } ssd1306_command_t;
 
+#ifdef SSD1306_USE_DMA
+#include "hardware/dma.h"
+/* construct and initialize the display struct used to generate the display output
+ * at compile time. This allows omitting the code to define the variables at runtime
+ * as all the details are known at compile time
+ */
+#define CREATE_DISPLAY(width_, height_, I2C, address_, dma_channel_, external_vcc_, id) \
+    uint8_t display_buffer_ ## id[width_*height_];\
+    uint16_t dma_tx_bufferbuffer_ ## id[width_*height_+1];\
+    ssd1306_t display_ ## id = {\
+	.dma_tx_buffer = dma_tx_bufferbuffer_ ## id,\
+	.buffer = display_buffer_ ## id,\
+	.bufsize = width_ * height_ / 8,\
+	.width = width_,\
+	.height = height_,\
+	.pages = height_ / 8,\
+	.address = address_,\
+	.dma_channel = dma_channel_,\
+	.external_vcc = external_vcc_,\
+	.i2c_i = I2C,\
+    }
+#endif
+
 /**
 *	@brief holds the configuration
 */
+#ifdef SSD1306_USE_DMA
 typedef struct {
-    uint8_t width; 		/**< width of display */
-    uint8_t height; 	/**< height of display */
-    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
-    uint8_t address; 	/**< i2c address of display*/
-    i2c_inst_t *i2c_i; 	/**< i2c connection instance */
-    bool external_vcc; 	/**< whether display uses external vcc */ 
-    uint8_t *buffer;	/**< display buffer */
-    size_t bufsize;		/**< buffer size */
+    volatile uint16_t *dma_tx_buffer;
+    volatile uint8_t *buffer;		/**< display buffer */
+    const size_t bufsize;		/**< buffer size */
+    const uint8_t width; 		/**< width of display */
+    const uint8_t height;		/**< height of display */
+    const uint8_t pages;		/**< stores pages of display (calculated on initialization*/
+    const uint8_t address;		/**< i2c address of display*/
+    const uint dma_channel;
+    const uint8_t external_vcc;	/**< whether display uses external vcc */ 
+    i2c_inst_t *i2c_i;		/**< i2c connection instance */
 } ssd1306_t;
+#else
+typedef struct {
+    size_t bufsize;		/**< buffer size */
+    uint8_t *buffer;		/**< display buffer */
+    uint8_t width; 		/**< width of display */
+    uint8_t height;		/**< height of display */
+    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
+    uint8_t address;		/**< i2c address of display*/
+    i2c_inst_t *i2c_i;		/**< i2c connection instance */
+    bool external_vcc;		/**< whether display uses external vcc */ 
+} ssd1306_t;
+#endif
 
+#ifdef SSD1306_USE_DMA
+bool ssd1306_init(ssd1306_t *p);
+#else
 /**
 *	@brief initialize display
 *
@@ -84,6 +126,7 @@ typedef struct {
 *	@retval false if initialization failed
 */
 bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance);
+#endif
 
 /**
 *	@brief deinitialize display
@@ -238,17 +281,6 @@ void ssd1306_bmp_show_image(ssd1306_t *p, const uint8_t *data, const long size);
 void ssd1306_draw_char_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, char c);
 
 /**
-	@brief draw char with builtin font
-
-	@param[in] p : instance of display
-	@param[in] x : x starting position of char
-	@param[in] y : y starting position of char
-	@param[in] scale : scale font to n times of original size (default should be 1)
-	@param[in] c : character to draw
-*/
-void ssd1306_draw_char(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, char c);
-
-/**
 	@brief draw string with given font
 
 	@param[in] p : instance of display
@@ -261,14 +293,16 @@ void ssd1306_draw_char(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, cha
 void ssd1306_draw_string_with_font(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const uint8_t *font, const char *s );
 
 /**
-	@brief draw string with builtin font
+	@brief Blit a sprite into the display buffer
 
-	@param[in] p : instance of display
-	@param[in] x : x starting position of text
-	@param[in] y : y starting position of text
-	@param[in] scale : scale font to n times of original size (default should be 1)
-	@param[in] s : text to draw
-*/
-void ssd1306_draw_string(ssd1306_t *p, uint32_t x, uint32_t y, uint32_t scale, const char *s);
-
+	@param[in] disp : instance of display with display buffer
+	@param[in] sprite : the buffer containing the sprite (padded if necessary)
+	@param[in] sprite_height : the height of the sprite in pixels
+	@param[in] sprite_width : the width of the sprite in pixels (number of columns)
+	@param[in] start_col : the column on the display containing the top left corner of the sprite
+	@param[in] start_row : the row containing the top left corner of the sprite
+ */
+void ssd1306_blit(ssd1306_t *disp, const char* sprite,
+		  uint32_t sprite_height, uint32_t sprite_width,
+		  uint32_t start_col, uint32_t start_row);
 #endif

@@ -1,3 +1,8 @@
+#ifndef _bmspa_font_h
+#define _bmspa_font_h
+#include <stdint.h>
+#include "font_struct.h"
+
 const uint8_t BMSPA_font[] = {
 	8, 8, 0, 32, 126,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //  
@@ -97,3 +102,12 @@ const uint8_t BMSPA_font[] = {
 	0x02,0x01,0x01,0x02,0x02,0x01,0x00,0x00, // ~
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
+
+const font bmspa = {
+	.bitmap_buffer =  (const char *)&BMSPA_font[5] ,
+	.first_char_in_font = 32,
+	.bytes_per_char = 8,
+	.char_width = 8,
+	.char_height = 8,
+};
+#endif
