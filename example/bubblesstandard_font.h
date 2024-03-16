@@ -1,3 +1,8 @@
+#ifndef _bubblesstandard_font_h
+#define _bmspa_font_h
+#include <stdint.h>
+#include "font_struct.h"
+
 const uint8_t bubblesstandard_font[] = {
 	8, 7, 0, 32, 126,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00, //  
@@ -97,3 +102,12 @@ const uint8_t bubblesstandard_font[] = {
 	0x10,0x08,0x08,0x10,0x10,0x08,0x00, // ~
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
+
+const font bubblesstandard = {
+	.bitmap_buffer =  (const char *)&bubblesstandard_font[5] ,
+	.first_char_in_font = 32,
+	.bytes_per_char = 7,
+	.char_width = 7,
+	.char_height = 8,
+};
+#endif
