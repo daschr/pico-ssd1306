@@ -31,7 +31,10 @@ SOFTWARE.
 #include <stdio.h>
 
 #include "ssd1306.h"
-#include "font.h"
+#ifdef SSD1306_USE_DMA
+#include "hardware/dma.h"
+#endif
+#include "font_struct.h"
 
 inline static void swap(int32_t *a, int32_t *b) {
     int32_t *t=a;
@@ -39,6 +42,7 @@ inline static void swap(int32_t *a, int32_t *b) {
     *b=*t;
 }
 
+#ifndef SSD1306_USE_DMA
 inline static void fancy_write(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, char *name) {
     switch(i2c_write_blocking(i2c, addr, src, len, false)) {
     case PICO_ERROR_GENERIC:
@@ -52,12 +56,55 @@ inline static void fancy_write(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src
         break;
     }
 }
+#endif
 
+#ifdef SSD1306_USE_DMA
+inline static void ssd1306_write(ssd1306_t *p, uint8_t val) {
+    uint8_t d[2]= {0x00, val};
+    i2c_write_blocking(p->i2c_i, p->address, d, 2, true);
+}
+#else
 inline static void ssd1306_write(ssd1306_t *p, uint8_t val) {
     uint8_t d[2]= {0x00, val};
     fancy_write(p->i2c_i, p->address, d, 2, "ssd1306_write");
 }
+#endif
 
+#ifdef SSD1306_USE_DMA
+bool ssd1306_init(ssd1306_t *p) {
+    uint8_t startup_commands[]= {
+        SET_DISP,
+        SET_DISP_CLK_DIV,
+        0x80,
+        SET_MUX_RATIO,
+        p->height - 1,
+        SET_DISP_OFFSET,
+        0x00,
+        SET_DISP_START_LINE,
+        SET_CHARGE_PUMP, \
+        p->external_vcc ? 0x10 : 0x14,
+        SET_SEG_REMAP | 0x01,
+        SET_COM_OUT_DIR | 0x08,
+        SET_COM_PIN_CFG,
+        p->width > 2 * p->height ? 0x02 : 0x12,
+        SET_CONTRAST,
+        0xff,
+        SET_PRECHARGE,
+        p->external_vcc ? 0x22 : 0xF1,
+        SET_VCOM_DESEL,
+        0x30,
+        SET_ENTIRE_ON,
+        SET_NORM_INV,
+        SET_DISP | 0x01,
+        SET_MEM_ADDR,
+        0x00,
+    };
+    dma_channel_claim(p->dma_channel);
+    for(size_t i=0; i<sizeof(startup_commands); ++i) {
+        ssd1306_write(p, startup_commands[i]);
+    }
+}
+#else
 bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance) {
     p->width=width;
     p->height=height;
@@ -114,10 +161,13 @@ bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address
 
     return true;
 }
+#endif
 
+#ifndef SSD1306_USE_DMA
 inline void ssd1306_deinit(ssd1306_t *p) {
     free(p->buffer-1);
 }
+#endif
 
 inline void ssd1306_poweroff(ssd1306_t *p) {
     ssd1306_write(p, SET_DISP|0x00);
@@ -282,6 +332,53 @@ inline void ssd1306_bmp_show_image(ssd1306_t *p, const uint8_t *data, const long
     ssd1306_bmp_show_image_with_offset(p, data, size, 0, 0);
 }
 
+#ifdef SSD1306_USE_DMA
+void copy_to_dma_tx(ssd1306_t *disp) {
+    disp->dma_tx_buffer[0] = 1u << I2C_IC_DATA_CMD_RESTART_LSB | 0x0040;
+    for (int i = 0; i < disp->bufsize-1; i++) {
+        disp->dma_tx_buffer[i+1] =  disp->buffer[i];
+    }
+    disp->dma_tx_buffer[disp->bufsize] = (1u << I2C_IC_DATA_CMD_STOP_LSB) | disp->buffer[disp->bufsize-1];
+}
+#endif
+
+#ifdef SSD1306_USE_DMA
+void ssd1306_show(ssd1306_t *p) {
+    // if there is already a transfer running, wait until it has completed
+    dma_channel_wait_for_finish_blocking(p->dma_channel);
+    copy_to_dma_tx(p);
+    // now set the address of the display that we want to write to
+    p->i2c_i->hw->enable = 0;
+    p->i2c_i->hw->tar = p->address;
+    p->i2c_i->hw->enable = 1;
+    uint8_t payload[]= {SET_COL_ADDR, 0, p->width-1, SET_PAGE_ADDR, 0, p->pages-1};
+    if(p->width==64) {
+        payload[1]+=32;
+        payload[2]+=32;
+    }
+
+    for(size_t i=0; i<sizeof(payload); ++i)
+        ssd1306_write(p, payload[i]);
+
+    // the things that are left to do is to set the read address, and set the transfer count
+    // (we are doing 16bit transfers that means the count equals the amount of bytes in the
+    // diplay buffer
+    dma_channel_config dma_config = dma_channel_get_default_config(p->dma_channel);
+    channel_config_set_transfer_data_size(&dma_config, DMA_SIZE_16);
+    channel_config_set_read_increment(&dma_config, true);
+    channel_config_set_write_increment(&dma_config, false);
+    // configure the i2c channel to cooperate with the dma engine
+    channel_config_set_dreq(&dma_config, i2c_get_dreq(p->i2c_i, true));
+    dma_channel_configure(
+        p->dma_channel,                        // Channel to be configured
+        &dma_config,                           // The configuration we just created
+        &i2c_get_hw(p->i2c_i)->data_cmd,       // The initial write address
+        p->dma_tx_buffer,                      // The initial read address
+        p->bufsize+1,                          // Number of transfers; in this case each is 2 byte.
+        true                                   // Start immediately.
+    );
+}
+#else
 void ssd1306_show(ssd1306_t *p) {
     uint8_t payload[]= {SET_COL_ADDR, 0, p->width-1, SET_PAGE_ADDR, 0, p->pages-1};
     if(p->width==64) {
@@ -296,3 +393,4 @@ void ssd1306_show(ssd1306_t *p) {
 
     fancy_write(p->i2c_i, p->address, p->buffer-1, p->bufsize+1, "ssd1306_show");
 }
+#endif

@@ -57,20 +57,61 @@ typedef enum {
     SET_CHARGE_PUMP = 0x8D
 } ssd1306_command_t;
 
+#ifdef SSD1306_USE_DMA
+#include "hardware/dma.h"
+/* construct and initialize the display struct used to generate the display output
+ * at compile time. This allows omitting the code to define the variables at runtime
+ * as all the details are known at compile time
+ */
+#define CREATE_DISPLAY(width_, height_, I2C, address_, dma_channel_, external_vcc_, id) \
+    uint8_t display_buffer_ ## id[width_*height_];\
+    uint16_t dma_tx_bufferbuffer_ ## id[width_*height_+1];\
+    ssd1306_t display_ ## id = {\
+	.dma_tx_buffer = dma_tx_bufferbuffer_ ## id,\
+	.buffer = display_buffer_ ## id,\
+	.bufsize = width_ * height_ / 8,\
+	.width = width_,\
+	.height = height_,\
+	.pages = height_ / 8,\
+	.address = address_,\
+	.dma_channel = dma_channel_,\
+	.external_vcc = external_vcc_,\
+	.i2c_i = I2C,\
+    }
+#endif
+
 /**
 *	@brief holds the configuration
 */
+#ifdef SSD1306_USE_DMA
 typedef struct {
-    uint8_t width; 		/**< width of display */
-    uint8_t height; 	/**< height of display */
-    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
-    uint8_t address; 	/**< i2c address of display*/
-    i2c_inst_t *i2c_i; 	/**< i2c connection instance */
-    bool external_vcc; 	/**< whether display uses external vcc */ 
-    uint8_t *buffer;	/**< display buffer */
-    size_t bufsize;		/**< buffer size */
+    volatile uint16_t *dma_tx_buffer;
+    volatile uint8_t *buffer;		/**< display buffer */
+    const size_t bufsize;		/**< buffer size */
+    const uint8_t width; 		/**< width of display */
+    const uint8_t height;		/**< height of display */
+    const uint8_t pages;		/**< stores pages of display (calculated on initialization*/
+    const uint8_t address;		/**< i2c address of display*/
+    const uint dma_channel;
+    const uint8_t external_vcc;	/**< whether display uses external vcc */ 
+    i2c_inst_t *i2c_i;		/**< i2c connection instance */
 } ssd1306_t;
+#else
+typedef struct {
+    size_t bufsize;		/**< buffer size */
+    uint8_t *buffer;		/**< display buffer */
+    uint8_t width; 		/**< width of display */
+    uint8_t height;		/**< height of display */
+    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
+    uint8_t address;		/**< i2c address of display*/
+    i2c_inst_t *i2c_i;		/**< i2c connection instance */
+    bool external_vcc;		/**< whether display uses external vcc */ 
+} ssd1306_t;
+#endif
 
+#ifdef SSD1306_USE_DMA
+bool ssd1306_init(ssd1306_t *p);
+#else
 /**
 *	@brief initialize display
 *
@@ -85,6 +126,7 @@ typedef struct {
 *	@retval false if initialization failed
 */
 bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance);
+#endif
 
 /**
 *	@brief deinitialize display
