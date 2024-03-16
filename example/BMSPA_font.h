@@ -103,7 +103,7 @@ const uint8_t BMSPA_font[] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-const font bmspa_font = {
+const font bmspa = {
 	.bitmap_buffer =  (const char *)&BMSPA_font[5] ,
 	.first_char_in_font = 32,
 	.bytes_per_char = 8,

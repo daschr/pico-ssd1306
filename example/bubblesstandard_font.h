@@ -1,5 +1,5 @@
 #ifndef _bubblesstandard_font_h
-#define _bmspa_font_h
+#define _bubblesstandard_font_h
 #include <stdint.h>
 #include "font_struct.h"
 
