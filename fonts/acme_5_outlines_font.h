@@ -1,3 +1,8 @@
+#ifndef _acme_font_h
+#define _acme_font_h
+#include <stdint.h>
+#include "font_struct.h"
+
 const uint8_t acme_font[] = {
 	8, 6, 1, 32, 126,
 	0x00,0x00,0x00,0x00,0x00,0x00, //  
@@ -97,3 +102,12 @@ const uint8_t acme_font[] = {
 	0x0f,0x09,0x0d,0x09,0x0b,0x09, // ~
 	0x00,0x00,0x00,0x00,0x00,0x00
 };
+
+const font acme = {
+	.bitmap_buffer =  (const char *)&acme_font[5] ,
+	.first_char_in_font = 32,
+	.bytes_per_char = 6,
+	.char_width = 6,
+	.char_height = 8,
+};
+#endif
