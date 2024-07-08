@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pico-ssd1306
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">Simple library for using ssd1306 displays with the Raspberry Pi Pico and the pico-sdk.</div>
   </td>
@@ -78,9 +78,9 @@ Include dependency graph for ssd1306.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ssd1306_8h__incl.png" border="0" usemap="#assd1306_8h" alt=""/></div>
 <map name="assd1306_8h" id="assd1306_8h">
-<area shape="rect" title=" " alt="" coords="79,5,167,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,107,107"/>
-<area shape="rect" title=" " alt="" coords="131,80,250,107"/>
+<area shape="rect" title=" " alt="" coords="71,5,154,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,97,107"/>
+<area shape="rect" title=" " alt="" coords="122,80,229,107"/>
 </map>
 </div>
 </div>
@@ -141,6 +141,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a2332fdd392f3e002a5f50e3c204c0e6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a2332fdd392f3e002a5f50e3c204c0e6a">ssd1306_invert</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint8_t inv)</td></tr>
 <tr class="memdesc:a2332fdd392f3e002a5f50e3c204c0e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">set invert display  <a href="ssd1306_8h.html#a2332fdd392f3e002a5f50e3c204c0e6a">More...</a><br /></td></tr>
 <tr class="separator:a2332fdd392f3e002a5f50e3c204c0e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a2f7faaf517e96cff3c47d8986144d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#ac6a2f7faaf517e96cff3c47d8986144d">ssd1306_vflip</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint8_t val)</td></tr>
+<tr class="memdesc:ac6a2f7faaf517e96cff3c47d8986144d"><td class="mdescLeft">&#160;</td><td class="mdescRight">set vertical flip of display  <a href="ssd1306_8h.html#ac6a2f7faaf517e96cff3c47d8986144d">More...</a><br /></td></tr>
+<tr class="separator:ac6a2f7faaf517e96cff3c47d8986144d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af478370e8f3a941ac5d5d5dc8b4a11b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#af478370e8f3a941ac5d5d5dc8b4a11b9">ssd1306_hflip</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint8_t val)</td></tr>
+<tr class="memdesc:af478370e8f3a941ac5d5d5dc8b4a11b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">set horizontal flop of display  <a href="ssd1306_8h.html#af478370e8f3a941ac5d5d5dc8b4a11b9">More...</a><br /></td></tr>
+<tr class="separator:af478370e8f3a941ac5d5d5dc8b4a11b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f7f4e389880f412318683f62cebeb2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a5f7f4e389880f412318683f62cebeb2c">ssd1306_rotate</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint8_t val)</td></tr>
+<tr class="memdesc:a5f7f4e389880f412318683f62cebeb2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">set rotation of display  <a href="ssd1306_8h.html#a5f7f4e389880f412318683f62cebeb2c">More...</a><br /></td></tr>
+<tr class="separator:a5f7f4e389880f412318683f62cebeb2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc04cfe30a15dfd3cc0b55ae2a2f57af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#afc04cfe30a15dfd3cc0b55ae2a2f57af">ssd1306_show</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p)</td></tr>
 <tr class="memdesc:afc04cfe30a15dfd3cc0b55ae2a2f57af"><td class="mdescLeft">&#160;</td><td class="mdescRight">display buffer, should be called on change  <a href="ssd1306_8h.html#afc04cfe30a15dfd3cc0b55ae2a2f57af">More...</a><br /></td></tr>
 <tr class="separator:afc04cfe30a15dfd3cc0b55ae2a2f57af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,8 +163,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:a7c875fba9869eaa52e27cf325da57147"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw pixel on buffer  <a href="ssd1306_8h.html#a7c875fba9869eaa52e27cf325da57147">More...</a><br /></td></tr>
 <tr class="separator:a7c875fba9869eaa52e27cf325da57147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61855e5afa6908a4abda2336dfc6cefc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a61855e5afa6908a4abda2336dfc6cefc">ssd1306_draw_line</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, int32_t x1, int32_t y1, int32_t x2, int32_t y2)</td></tr>
-<tr class="memdesc:a61855e5afa6908a4abda2336dfc6cefc"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw pixel on buffer  <a href="ssd1306_8h.html#a61855e5afa6908a4abda2336dfc6cefc">More...</a><br /></td></tr>
+<tr class="memdesc:a61855e5afa6908a4abda2336dfc6cefc"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw line on buffer  <a href="ssd1306_8h.html#a61855e5afa6908a4abda2336dfc6cefc">More...</a><br /></td></tr>
 <tr class="separator:a61855e5afa6908a4abda2336dfc6cefc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe48d45d9ddeee6d86624f2d98e6fa99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#abe48d45d9ddeee6d86624f2d98e6fa99">ssd1306_clear_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
+<tr class="memdesc:abe48d45d9ddeee6d86624f2d98e6fa99"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear square at given position with given size  <a href="ssd1306_8h.html#abe48d45d9ddeee6d86624f2d98e6fa99">More...</a><br /></td></tr>
+<tr class="separator:abe48d45d9ddeee6d86624f2d98e6fa99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77731d3dfec84511f7b1b8205cc764c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306_8h.html#a77731d3dfec84511f7b1b8205cc764c3">ssd1306_draw_square</a> (<a class="el" href="structssd1306__t.html">ssd1306_t</a> *p, uint32_t x, uint32_t y, uint32_t width, uint32_t height)</td></tr>
 <tr class="memdesc:a77731d3dfec84511f7b1b8205cc764c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw filled square at given position with given size  <a href="ssd1306_8h.html#a77731d3dfec84511f7b1b8205cc764c3">More...</a><br /></td></tr>
 <tr class="separator:a77731d3dfec84511f7b1b8205cc764c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -366,6 +378,64 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: x position </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>: y position </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe48d45d9ddeee6d86624f2d98e6fa99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe48d45d9ddeee6d86624f2d98e6fa99">&#9670;&nbsp;</a></span>ssd1306_clear_square()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_clear_square </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clear square at given position with given size </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>: x position of starting point </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>: y position of starting point </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>: width of square </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>: height of square </td></tr>
   </table>
   </dd>
 </dl>
@@ -676,7 +746,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>draw pixel on buffer </p>
+<p>draw line on buffer </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
@@ -915,6 +985,51 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af478370e8f3a941ac5d5d5dc8b4a11b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af478370e8f3a941ac5d5d5dc8b4a11b9">&#9670;&nbsp;</a></span>ssd1306_hflip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_hflip </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set horizontal flop of display </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>: val==0: disable flop, val!=0: flop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a56995249d6623b978ed8e943b4f156be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56995249d6623b978ed8e943b4f156be">&#9670;&nbsp;</a></span>ssd1306_init()</h2>
 
@@ -1094,6 +1209,51 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a5f7f4e389880f412318683f62cebeb2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f7f4e389880f412318683f62cebeb2c">&#9670;&nbsp;</a></span>ssd1306_rotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_rotate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set rotation of display </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>: val==0: disable rotation, val!=0: rotate </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="afc04cfe30a15dfd3cc0b55ae2a2f57af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc04cfe30a15dfd3cc0b55ae2a2f57af">&#9670;&nbsp;</a></span>ssd1306_show()</h2>
 
@@ -1114,6 +1274,51 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac6a2f7faaf517e96cff3c47d8986144d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6a2f7faaf517e96cff3c47d8986144d">&#9670;&nbsp;</a></span>ssd1306_vflip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ssd1306_vflip </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structssd1306__t.html">ssd1306_t</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set vertical flip of display </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">p</td><td>: instance of display </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">val</td><td>: val==0: disable flip, val!=0: flip </td></tr>
   </table>
   </dd>
 </dl>

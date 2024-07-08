@@ -105,5 +105,8 @@ void animation(void) {
         ssd1306_bmp_show_image(&disp, image_data, image_size);
         ssd1306_show(&disp);
         sleep_ms(2000);
+        ssd1306_rotate(&disp, 1);
+        sleep_ms(2000);
+        ssd1306_rotate(&disp, 0);
     }
 }

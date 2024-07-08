@@ -128,6 +128,33 @@ void ssd1306_contrast(ssd1306_t *p, uint8_t val);
 void ssd1306_invert(ssd1306_t *p, uint8_t inv);
 
 /**
+	@brief set vertical flip of display
+
+	@param[in] p : instance of display
+	@param[in] val : val==0: disable flip, val!=0: flip
+
+*/
+void ssd1306_vflip(ssd1306_t *p, uint8_t val);
+
+/**
+	@brief set horizontal flop of display
+
+	@param[in] p : instance of display
+	@param[in] val : val==0: disable flop, val!=0: flop
+
+*/
+void ssd1306_hflip(ssd1306_t *p, uint8_t val);
+
+/**
+	@brief set rotation of display
+
+	@param[in] p : instance of display
+	@param[in] val : val==0: disable rotation, val!=0: rotate
+
+*/
+void ssd1306_rotate(ssd1306_t *p, uint8_t val);
+
+/**
 	@brief display buffer, should be called on change
 
 	@param[in] p : instance of display

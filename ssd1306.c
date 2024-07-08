@@ -136,6 +136,19 @@ inline void ssd1306_invert(ssd1306_t *p, uint8_t inv) {
     ssd1306_write(p, SET_NORM_INV | (inv & 1));
 }
 
+inline void ssd1306_vflip(ssd1306_t *p, uint8_t val) {
+    ssd1306_write(p, SET_COM_OUT_DIR | (!val << 3));
+}
+
+inline void ssd1306_hflip(ssd1306_t *p, uint8_t val) {
+    ssd1306_write(p, SET_SEG_REMAP | (!val & 1));
+}
+
+inline void ssd1306_rotate(ssd1306_t *p, uint8_t val) {
+    ssd1306_vflip(p, val);
+    ssd1306_hflip(p, val);
+}
+
 inline void ssd1306_clear(ssd1306_t *p) {
     memset(p->buffer, 0, p->bufsize);
 }
