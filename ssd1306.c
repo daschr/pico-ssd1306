@@ -34,9 +34,9 @@ SOFTWARE.
 #include "font.h"
 
 inline static void swap(int32_t *a, int32_t *b) {
-    int32_t *t=a;
+    int32_t t=*a;
     *a=*b;
-    *b=*t;
+    *b=t;
 }
 
 inline static void fancy_write(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, char *name) {
