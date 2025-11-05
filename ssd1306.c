@@ -24,7 +24,7 @@ SOFTWARE.
 */
 
 #include <pico/stdlib.h>
-#include <hardware/i2c.h>
+#include <hardware/spi.h>
 #include <pico/binary_info.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,44 +36,46 @@ SOFTWARE.
 inline static void swap(int32_t *a, int32_t *b) {
     int32_t *t=a;
     *a=*b;
-    *b=*t;
+    *b=t;
 }
 
-inline static void fancy_write(i2c_inst_t *i2c, uint8_t addr, const uint8_t *src, size_t len, char *name) {
-    switch(i2c_write_blocking(i2c, addr, src, len, false)) {
-    case PICO_ERROR_GENERIC:
-        printf("[%s] addr not acknowledged!\n", name);
-        break;
-    case PICO_ERROR_TIMEOUT:
-        printf("[%s] timeout!\n", name);
-        break;
-    default:
-        //printf("[%s] wrote successfully %lu bytes!\n", name, len);
-        break;
-    }
+inline static void fancy_write(spi_inst_t *spi, const uint8_t *src, size_t len, char *name) {
+    uint res = spi_write_blocking(spi, src, len);
+    //printf("name: %s, return: %d\n", name, res);
 }
 
 inline static void ssd1306_write(ssd1306_t *p, uint8_t val) {
-    uint8_t d[2]= {0x00, val};
-    fancy_write(p->i2c_i, p->address, d, 2, "ssd1306_write");
+    gpio_put(p->dc_pin, 0);
+    fancy_write(p->spi_i, &val, 1, "ssd1306_write");
 }
 
-bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance) {
+bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint dc_pin, uint rst_pin, spi_inst_t *spi_instance) {
     p->width=width;
     p->height=height;
     p->pages=height/8;
-    p->address=address;
+    p->dc_pin=dc_pin;
+    p->rst_pin=rst_pin;
 
-    p->i2c_i=i2c_instance;
+    p->spi_i=spi_instance;
 
+    gpio_init(p->dc_pin);
+    gpio_set_dir(p->dc_pin, GPIO_OUT);
+
+    gpio_init(p->rst_pin);
+    gpio_set_dir(p->rst_pin, GPIO_OUT);
+    gpio_put(p->rst_pin, 1);
+    sleep_ms(1);
+    gpio_put(p->rst_pin, 0);
+    sleep_ms(10);
+    gpio_put(p->rst_pin, 1);
+    sleep_ms(10);
 
     p->bufsize=(p->pages)*(p->width);
-    if((p->buffer=malloc(p->bufsize+1))==NULL) {
+    if((p->buffer=malloc(p->bufsize))==NULL) {
         p->bufsize=0;
         return false;
     }
 
-    ++(p->buffer);
 
     // from https://github.com/makerportal/rpi-pico-ssd1306
     uint8_t cmds[]= {
@@ -116,7 +118,7 @@ bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address
 }
 
 inline void ssd1306_deinit(ssd1306_t *p) {
-    free(p->buffer-1);
+    free(p->buffer);
 }
 
 inline void ssd1306_poweroff(ssd1306_t *p) {
@@ -300,7 +302,7 @@ void ssd1306_show(ssd1306_t *p) {
     for(size_t i=0; i<sizeof(payload); ++i)
         ssd1306_write(p, payload[i]);
 
-    *(p->buffer-1)=0x40;
+    gpio_put(p->dc_pin, 1);
 
-    fancy_write(p->i2c_i, p->address, p->buffer-1, p->bufsize+1, "ssd1306_show");
+    fancy_write(p->spi_i, p->buffer, p->bufsize, "ssd1306_show");
 }
