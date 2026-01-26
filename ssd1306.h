@@ -26,12 +26,39 @@ SOFTWARE.
 * @file ssd1306.h
 * 
 * simple driver for ssd1306 displays
+* supports both SPI and I2C interfaces
 */
 
 #ifndef _inc_ssd1306
 #define _inc_ssd1306
+
+/**
+ * @brief Protocol selection - uncomment ONE of the following to select the interface
+ * 
+ * SSD1306_USE_SPI - Use SPI interface (requires DC and RST pins)
+ * SSD1306_USE_I2C - Use I2C interface (requires I2C address)
+ * 
+ * Default is SPI if neither is defined
+ */
+// #define SSD1306_USE_I2C
+#define SSD1306_USE_SPI
+
+/* Validate that exactly one protocol is selected */
+#if defined(SSD1306_USE_SPI) && defined(SSD1306_USE_I2C)
+#error "Cannot define both SSD1306_USE_SPI and SSD1306_USE_I2C. Choose one."
+#endif
+
+#if !defined(SSD1306_USE_SPI) && !defined(SSD1306_USE_I2C)
+#define SSD1306_USE_SPI  /* Default to SPI */
+#endif
+
 #include <pico/stdlib.h>
+
+#ifdef SSD1306_USE_SPI
 #include <hardware/spi.h>
+#else
+#include <hardware/i2c.h>
+#endif
 
 /**
 *	@brief defines commands used in ssd1306
@@ -62,10 +89,17 @@ typedef enum {
 typedef struct {
     uint8_t width; 		/**< width of display */
     uint8_t height; 	/**< height of display */
-    uint8_t pages;		/**< stores pages of display (calculated on initialization*/
-    uint dc_pin; 	    /**< spi dc pin number*/
-	uint rst_pin;       /**< spi rst pin number */
-    spi_inst_t *spi_i; 	/**< spi connection instance */
+    uint8_t pages;		/**< stores pages of display (calculated on initialization) */
+    
+#ifdef SSD1306_USE_SPI
+    uint dc_pin; 	    /**< SPI data/command pin number */
+    uint rst_pin;       /**< SPI reset pin number */
+    spi_inst_t *spi_i; 	/**< SPI connection instance */
+#else /* I2C */
+    uint8_t address; 	/**< I2C address of display */
+    i2c_inst_t *i2c_i; 	/**< I2C connection instance */
+#endif
+
     bool external_vcc; 	/**< whether display uses external vcc */ 
     uint8_t *buffer;	/**< display buffer */
     size_t bufsize;		/**< buffer size */
@@ -77,15 +111,24 @@ typedef struct {
 *	@param[in] p : pointer to instance of ssd1306_t
 *	@param[in] width : width of display
 *	@param[in] height : height of display
+#ifdef SSD1306_USE_SPI
 *	@param[in] dc_pin : SPI data/command pin number
 *	@param[in] rst_pin : SPI reset pin number
-*	@param[in] spi_instance : instance of spi connection
+*	@param[in] spi_instance : instance of SPI connection
+#else
+*	@param[in] address : I2C address of display
+*	@param[in] i2c_instance : instance of I2C connection
+#endif
 *	
 * 	@return bool.
 *	@retval true for Success
 *	@retval false if initialization failed
 */
+#ifdef SSD1306_USE_SPI
 bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint dc_pin, uint rst_pin, spi_inst_t *spi_instance);
+#else /* I2C */
+bool ssd1306_init(ssd1306_t *p, uint16_t width, uint16_t height, uint8_t address, i2c_inst_t *i2c_instance);
+#endif
 
 /**
 *	@brief deinitialize display

@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <string.h>
 #include "pico/stdlib.h"
-#include "hardware/i2c.h"
 
 #include "ssd1306.h"
 #include "image.h"
@@ -15,6 +14,25 @@ const uint8_t num_chars_per_disp[]={7,7,7,5};
 const uint8_t *fonts[4]= {acme_font, bubblesstandard_font, crackers_font, BMSPA_font};
 
 #define SLEEPTIME 25
+
+/*
+ * Pin definitions - adjust these for your hardware setup
+ */
+#ifdef SSD1306_USE_SPI
+/* SPI pin definitions */
+#define SPI_PORT spi0
+#define PIN_SCK  18   /* SPI clock */
+#define PIN_MOSI 19   /* SPI MOSI (data) */
+#define PIN_DC   20   /* Data/Command */
+#define PIN_RST  21   /* Reset */
+#define PIN_CS   17   /* Chip Select (directly connect to GND if only one device) */
+#else
+/* I2C pin definitions */
+#define I2C_PORT i2c1
+#define PIN_SDA  2
+#define PIN_SCL  3
+#define I2C_ADDR 0x3C
+#endif
 
 void setup_gpios(void);
 void animation(void);
@@ -33,11 +51,24 @@ int main() {
 
 
 void setup_gpios(void) {
-    i2c_init(i2c1, 400000);
-    gpio_set_function(2, GPIO_FUNC_I2C);
-    gpio_set_function(3, GPIO_FUNC_I2C);
-    gpio_pull_up(2);
-    gpio_pull_up(3);
+#ifdef SSD1306_USE_SPI
+    /* Initialize SPI at 1MHz */
+    spi_init(SPI_PORT, 1000000);
+    gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
+    gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
+    
+    /* Chip select - optional, can be tied to GND */
+    gpio_init(PIN_CS);
+    gpio_set_dir(PIN_CS, GPIO_OUT);
+    gpio_put(PIN_CS, 0);  /* Select the device */
+#else
+    /* Initialize I2C at 400kHz */
+    i2c_init(I2C_PORT, 400000);
+    gpio_set_function(PIN_SDA, GPIO_FUNC_I2C);
+    gpio_set_function(PIN_SCL, GPIO_FUNC_I2C);
+    gpio_pull_up(PIN_SDA);
+    gpio_pull_up(PIN_SCL);
+#endif
 }
 
 
@@ -46,7 +77,12 @@ void animation(void) {
 
     ssd1306_t disp;
     disp.external_vcc=false;
-    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
+    
+#ifdef SSD1306_USE_SPI
+    ssd1306_init(&disp, 128, 64, PIN_DC, PIN_RST, SPI_PORT);
+#else
+    ssd1306_init(&disp, 128, 64, I2C_ADDR, I2C_PORT);
+#endif
     ssd1306_clear(&disp);
 
     printf("ANIMATION!\n");
